@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\title{CS224S Assignment 1: Speech Systems and Phonetics}
+\author{Borislav Mavrin}
+\date{Winter 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{[30 pts] Speech APIs and Personal Assistants}
+
+    \subsection{Speech Transcription}
+    
+        \begin{enumerate}
+            \item Simple messages results from iOS email dictation:
+            
+                \emph{hey how are you I was thinking if you prefer you can come to our dinner party tomorrow please let me know if you're coming or not}
+                
+                \emph{hi I'm planning to go for a vacation probably in Mexico let me know if you want to join us in \textbf{the strip} and I will book tickets for you}
+                
+            The only error is \textbf{the strip}, which has to be \textbf{this trip}.
+            
+            \item The system does not guess the punctuation, but allows punctuation commands, e.g. \emph{"comma", "period", etc.}
+            
+            \item As it can be seen from the following example: \emph{hey I'm planning to leave at five delete that I meant six}
+            the system does not support corrections. However, it does correct words on-the-fly given more context.
+            
+            \item I was able to break the system by using domain specific terminology as in the following example:
+            
+                \textbf{original:}
+                \emph{GANs or generative adversarial networks in machine learning. This is a very cool field of AI.}
+                
+                \textbf{result:}
+                \emph{Gantz or generator for the referral networks in machine learning this is a very cool field of 38}
+                
+                The system, apparently, does not have words like \emph{"GANs", "adversarial"} in its dictionary or does not handle them well.
+                
+                I also tried switching from English to Russian within single utterance:
+                \textbf{original:}
+                \emph{Hey how are you? <continued in Russian>}
+                
+                \textbf{result:}
+                \emph{hey how are you created}
+                
+                The user have to switch languages explicitly.
+            
+            
+        \end{enumerate}
+    
+    \subsection{Personal Assistants}
+        I used Google Assistant on Google Home for the experiments in this section.
+        \begin{enumerate}
+            \item The system answers factual questions accurately and supports follow up questions. The answers are given in complete sentences.
+            
+            \textbf{me:} \textit{"Who wrote The Great Gatsby?"}
+            
+            \textbf{G:} \textit{"F. Scott Fitzgerald wrote The Great Gatsby."}
+            
+            \textbf{me:} \textit{"When was that book published?"}
+            
+            \textbf{G:} \textit{"The Great Gatsby was first published on April 10, 1925."}
+            
+            \item I asked the system for burger places near me.
+            The system suggested one place and provided the rating in the same interaction, I tried asking about the menu - it gave me more locations of the same chain.
+            I tried a few times but couldn't get past two interactions.
+            The interaction was completely speech driven.
+
+            \item The system failed to process a lengthy initial command with time, attendees and location.
+            However, when I started with a simple “create an event”, the system asked me about the time and title of the event. I followed up by adding location.
+            
+            \item I tried a few themes, but the system didn't allow me to barge-in without wake word. Then I tried to barge in with a wake word and the system allowed me to make corrections.
+            
+            \textbf{me:} \textit{"Hey Google. Who is stronger Thor or Batman?"}
+            
+            \textbf{G:} \textit{[long response]}
+            
+            \textbf{me [during response]:} \textit{"Hey Google. I meant Hulk."}
+            
+            \textbf{G:} \textit{[gave a response to "Who is stronger Thor or Hulk?"]}
+            
+            \item All the issues I had can be contributed to the limited functionality and issues with speech recognition.
+        \end{enumerate}
+    
+    \subsection{Text-to-Speech (TTS) API}
+        \begin{enumerate}
+            \item I was able to understand all words easily. But the voice does not sound human. I noticed abrupt changes in tone, noise, lack of pauses and no changes in intonation.
+            \item The system tries to change the intonation in sentences with "!" and "?". But it does not feel natural.
+            \item Adding pauses does help - but I still hear sharp noises.
+        \end{enumerate}
+
+\section{[20 pts] Phonetic Transcription}
+    \subsection{Correct mistakes}
+        We often process speech data in phonemes instead of words. Find and correct the mistakes in the ARPAbet transcriptions of the following words:
+        \begin{enumerate}
+            \item three [dh r i] [th r iy]
+            \item sing [s ih n g] [s ih ng]
+            \item eyes [ay s] [ay z]
+            \item study [s t uh d i] [s t ah1 d iy]
+            \item though [th ow] [dh ow]
+            \item planning [p pl aa n ih ng] [p l ae n ih ng]
+            \item slight [s l iy t] [s l ay t]
+            \item action [ae k t ah n] [ae k sh ah n]
+            \item tangle [t ae ng g l] [t ae ng g ah l]
+            \item higher [hh ay g er] [hh ay er]
+        \end{enumerate}
+        
+    \subsection{Transcribe}
+        Transcribe the following words into ARPAbet.
+        \begin{enumerate}
+            \item red [r eh d]
+            \item blue [b l uw]
+            \item green [g r iy n]
+            \item yellow [y eh l ow]
+            \item black [b l ae k]
+            \item purple [p er p ah l]
+            \item suit [s uw t]
+            \item wash [w aa sh]
+            \item water [w ao t er]
+            \item watermelon [w ao t er m eh l ah n]
+        \end{enumerate}
+    NOTE: I used CMU's resource at
+    \url{http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/cmudict-0.7b}
+\section{[50 pts] Getting Comfortable with Speech Data}
+
+See the Assignment 1 page on the website for submission instructions.
+
+\end{document}
